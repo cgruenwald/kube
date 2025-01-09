@@ -8,13 +8,13 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argocd.opendesk.raynet.de`)
+      match: Host(`argo-cd.sts34.de`)
       priority: 10
       services:
         - name: argocd-server
           port: 80
     - kind: Rule
-      match: Host(`argocd.opendesk.raynet.de`) && Header(`Content-Type`, `application/grpc`)
+      match: Host(`argo-cd.sts34.de`) && Header(`Content-Type`, `application/grpc`)
       priority: 11
       services:
         - name: argocd-server

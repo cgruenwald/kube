@@ -7,7 +7,7 @@ resources:
 # - base/argo-cd-cmp-helmfile-cm.yaml
 - base/argo-cd-namespace.yaml
 # - base/argo-cd-certificate.yaml
-# - base/argo-cd-ui-ingress.yaml
+- base/argo-cd-ui-ingressroute.yaml
 # - base/argo-cd-servicemonitors.yaml
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.13.3/manifests/install.yaml
 
@@ -19,12 +19,12 @@ resources:
 #   target:
 #     kind: Deployment
 #     name: argocd-repo-server
-# 
+#
 # - path: overlays/argo-cd-networkpolicy.yaml
 #   target:
 #     kind: NetworkPolicy
 #     name: argocd-redis-ha-proxy-network-policy
-# 
+#
 # - path: overlays/argo-cd-networkpolicy2.yaml
 #   target:
 #     kind: NetworkPolicy

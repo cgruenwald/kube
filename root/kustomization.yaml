@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- base/argo-cd.yaml
+# - base/cert-manager-webhook-hetzner.yaml
+# - base/longhorn-app.yaml
+# - base/trivy-operator.yaml
+# - base/ingress-nginx.yaml
+# - base/mongodb-operator.yaml
+# - base/mongodb.yaml
+# - base/postgres.yaml
+# - base/rno-runner.yaml
+# - base/k8sgpt-operator.yaml
+# - base/k8sgpt.yaml
+# - base/local-ai.yaml
+# # - base/loki.yaml
+# - base/grafana-alloy.yaml
+# - base/kube-prom-stack.yaml
+# - base/prometheus-operator-crds.yaml
+#
+# - extra-manifests/cluster-issuer.yaml
+# - extra-manifests/grafana-ui-ingress.yaml
+# # - extra-manifests/loki-secret.yaml
+#
+# - ../grafana-operator
+# - ../datahub-sa-token
