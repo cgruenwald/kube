@@ -12,9 +12,9 @@ resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.13.3/manifests/install.yaml
 
 
-# patches:
-# - path: overlays/argo-cd-cm.yaml
-# - path: overlays/argocd-cmd-params-cm.yaml
+patches:
+- path: overlays/argo-cd-cm.yaml
+- path: overlays/argocd-cmd-params-cm.yaml
 # - path: overlays/sidecar-plugin.yaml
 #   target:
 #     kind: Deployment
