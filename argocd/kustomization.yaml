@@ -6,7 +6,7 @@ namespace: argocd
 resources:
 # - base/argo-cd-cmp-helmfile-cm.yaml
 - base/argo-cd-namespace.yaml
-- base/argo-cd-certificate.yaml
+# - base/argo-cd-certificate.yaml
 - base/argo-cd-ui-ingress.yaml
 # - base/argo-cd-ui-ingressroute.yaml
 - base/argo-cd-servicemonitors.yaml
