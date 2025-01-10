@@ -6,4 +6,5 @@ namespace: elastic-system
 resources:
 - base/namespace.yaml
 - https://download.elastic.co/downloads/eck/2.16.0/crds.yaml
-- https://download.elastic.co/downloads/eck/2.16.0/operator.yaml
+patches:
+- path: https://download.elastic.co/downloads/eck/2.16.0/operator.yaml
