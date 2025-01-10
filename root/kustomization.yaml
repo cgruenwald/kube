@@ -5,7 +5,7 @@ resources:
 - base/argo-cd.yaml
 - base/observability.yaml
 - base/elastic-system.yaml
-- base/grafana-operator.yaml
+# - base/grafana-operator.yaml
 # - base/cert-manager-webhook-hetzner.yaml
 # - base/longhorn-app.yaml
 # - base/trivy-operator.yaml
