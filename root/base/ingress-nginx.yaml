@@ -16,19 +16,30 @@ spec:
       helm:
         values: |
           controller:
-            metrics:
-              port: 10254
-              portName: metrics
-              enabled: true
-              service:
-                annotations:
-                  prometheus.io/scrape: "true"
-                  prometheus.io/port: "10254"
-            allowSnippetAnnotations: "true"
+            hostNetwork: false
+            allowSnippetAnnotations: true
             extraArgs:
               enable-ssl-passthrough: "true"
-            kind: Deployment
-            watchIngressWithoutClass: "true"
+            ingressClassResource:
+              default: true
+            kind: DaemonSet
+            metrics:
+              enabled: true
+              port: 10254
+              portName: metrics
+              service:
+                annotations:
+                  prometheus.io/port: "10254"
+                  prometheus.io/scrape: "true"
+              serviceMonitor:
+                enabled: true
+                additionalLabels:
+                  release: kube-prom
+                scrapeInterval: 10s
+            service:
+              watchIngressWithoutClass: "true"
+          defaultBackend:
+            enabled: true
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx

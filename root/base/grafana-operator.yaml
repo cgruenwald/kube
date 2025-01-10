@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-operator
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  project: default
+  source:
+    chart: grafana-operator
+    repoURL: ghcr.io/grafana/helm-charts
+    targetRevision: v5.15.1
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: grafana-operator
