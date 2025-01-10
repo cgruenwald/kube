@@ -6,9 +6,9 @@ metadata:
 spec:
   secretName: argocd-server-tls
   issuerRef:
-    name: letsencrypt-prod
+    name: hetzner-prod-issuer
     kind: ClusterIssuer
-  commonName: argocd.opendesk.raynet.de
+  commonName: argocd.sts34.de
   dnsNames:
-  - argocd.opendesk.raynet.de
+  - argocd.sts34.de
 ...

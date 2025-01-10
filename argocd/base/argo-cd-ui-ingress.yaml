@@ -5,13 +5,11 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    cert-manager.io/cluster-issuer: hetzner-prod-issuer
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.opendesk.raynet.de
+  - host: argocd.sts34.de
     http:
       paths:
       - path: /
@@ -20,9 +18,9 @@ spec:
           service:
             name: argocd-server
             port:
-              name: https
+              name: http
   tls:
   - hosts:
-    - argocd.opendesk.raynet.de
+    - argocd.sts34.de
     secretName: argocd-server-tls
 ...
