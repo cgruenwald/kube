@@ -4,6 +4,8 @@ kind: Application
 metadata:
   name: grafana-operator
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
 spec:
   syncPolicy:
     automated: 
@@ -11,6 +13,7 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+    - ServerSideApply=true
   project: default
   source:
     chart: grafana-operator
