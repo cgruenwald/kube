@@ -13,7 +13,7 @@ spec:
   project: default
   sources:
     - chart: minio
-      repoURL: https://charts.bitnami.com/bitnami
+      repoURL: https://charts.bitnami.com
       targetRevision: "14.10.x"
       helm:
         values: |

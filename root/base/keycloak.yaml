@@ -13,7 +13,7 @@ spec:
   project: default
   sources:
     - chart: keycloak
-      repoURL: https://charts.bitnami.com/bitnami
+      repoURL: https://charts.bitnami.com
       targetRevision: "24.3.x"
       helm:
         values: |
