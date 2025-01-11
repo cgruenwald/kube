@@ -7,7 +7,7 @@ resources:
 - base/elastic-system.yaml
 - base/grafana-operator.yaml
 - base/minio.yaml
-- base/vault.yaml
+# - base/vault.yaml
 - base/keycloak.yaml
 # - base/cert-manager-webhook-hetzner.yaml
 # - base/longhorn-app.yaml
