@@ -11,10 +11,10 @@ resources:
 - base/vault.yaml
 - base/keycloak.yaml
 - base/cilium.yaml
+- base/ingress-nginx.yaml
 # - base/cert-manager-webhook-hetzner.yaml
 # - base/longhorn-app.yaml
 # - base/trivy-operator.yaml
-# - base/ingress-nginx.yaml
 # - base/mongodb-operator.yaml
 # - base/mongodb.yaml
 # - base/postgres.yaml
