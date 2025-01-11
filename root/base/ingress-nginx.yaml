@@ -18,7 +18,8 @@ spec:
       helm:
         values: |
           controller:
-            hostNetwork: false
+            externalTrafficPolicy: "Local"
+            hostNetwork: true
             allowSnippetAnnotations: "true"
             extraArgs:
               enable-ssl-passthrough: "true"

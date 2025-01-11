@@ -57,7 +57,7 @@ ingress:
   tls:
     - secretName: nextcloud-tls
       hosts:
-        - nc.sts34.de
+        - nextcloud.sts34.de
   labels: {}
   path: /
   pathType: Prefix
@@ -74,7 +74,7 @@ phpClientHttpsFix:
   protocol: https
 
 nextcloud:
-  host: nc.sts34.de
+  host: nextcloud.sts34.de
   username: admin
   password: changeme
   ## Use an existing secret
