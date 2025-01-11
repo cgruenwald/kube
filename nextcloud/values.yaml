@@ -74,20 +74,20 @@ phpClientHttpsFix:
   protocol: https
 
 nextcloud:
-  host: nextcloud.sts34.de
+  host: nextcloud
   username: admin
   password: changeme
   ## Use an existing secret
   existingSecret:
     enabled: false
-    # secretName: nameofsecret
+    secretName: nextcloud
     usernameKey: nextcloud-username
     passwordKey: nextcloud-password
-    tokenKey: ""
+    tokenKey: nextcloud-token
     smtpUsernameKey: smtp-username
     smtpPasswordKey: smtp-password
     smtpHostKey: smtp-host
-  update: 0
+  update: 1
   # If web server is not binding default port, you can define it
   containerPort: 80
   datadir: /var/www/html/data
@@ -101,9 +101,9 @@ nextcloud:
     # the user we send email as
     fromAddress: user
     # the domain we send email from
-    domain: domain.com
+    domain: sts34.de
     smtp:
-      host: domain.com
+      host: sts34.de
       secure: ssl
       port: 465
       authtype: LOGIN
@@ -122,7 +122,7 @@ nextcloud:
       # use legacy auth method
       legacyAuth: false
       # s3 endpoint to use; only required if you're not using AWS
-      host: ""
+      host: "minio.sts34.de"
       # use TLS/SSL for S3 connections
       ssl: true
       # default port that can be changed based on your object store, e.g. for minio, you can use 9000
@@ -134,7 +134,7 @@ nextcloud:
       # object prefix in bucket
       prefix: ""
       # set to true if you are not using DNS for your buckets.
-      usePathStyle: false
+      usePathStyle: true
       # autocreate the bucket
       autoCreate: false
       # optonal parameter: you probably want to keep this as default
@@ -386,16 +386,16 @@ externalDatabase:
   type: postgresql
 
   ## Database host. You can optionally include a colon delimited port like "myhost:1234"
-  host: ""
+  host: "nextcloud-db-rw:5432"
 
   ## Database user
-  user: nextcloud
+  user: app
 
   ## Database password
   password: ""
 
   ## Database name
-  database: nextcloud
+  database: app
 
   ## Use a existing secret
   existingSecret:
