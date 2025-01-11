@@ -1,0 +1,13 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nextcloud-db
+  namespace: nextcloud
+spec:
+  instances: 3
+  storage:
+    size: 20Gi
+    storageClass: directpv-min-io
+  monitoring:
+    enablePodMonitor: true
