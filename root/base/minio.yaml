@@ -14,7 +14,7 @@ spec:
   sources:
     - chart: minio
       repoURL: registry-1.docker.io/bitnamicharts
-      targetRevision: v14.10.3
+      targetRevision: 14.10.x
       helm:
         values: |
           auth:
