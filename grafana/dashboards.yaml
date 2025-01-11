@@ -9,7 +9,7 @@ metadata:
   namespace: monitoring
 spec:
   external:
-    url: http://kube-prom-grafana.monitoring.svc.cluster.local:3000
+    url: https://grafana.sts34.de
     adminUser:
       key: admin-username
       name: grafana-admin
