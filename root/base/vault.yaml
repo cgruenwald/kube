@@ -1,0 +1,62 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+  project: default
+  sources:
+    - chart: vault
+      repoURL: https://helm.releases.hashicorp.com
+      targetRevision: "0.29.x"
+      helm:
+        values: |
+          ui:
+            enabled: true
+          server:
+            ha:
+              enabled: true
+              replicas: 3
+              raft:
+                enabled: true
+            standalone:
+              enabled: false
+            dataStorage:
+              storageClass: directpv-min-io
+              size: 8Gi
+            resources:
+              limits:
+                cpu: 250m
+                memory: 256Mi
+              requests:
+                cpu: 50m
+                memory: 256Mi
+            livenessProbe:
+              enabled: true
+              path: "/v1/sys/health?standbyok=true"
+              initialDelaySeconds: 120
+            readinessProbe:
+              enabled: true
+              path: "/v1/sys/health?standbyok=true&sealedcode=204&uninitcode=204"
+            ingress:
+              enabled: true
+              ingressClassName: "nginx"
+              annotations:
+                cert-manager.io/cluster-issuer: "hetzner-prod-issuer"
+                nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+                nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+              hosts:
+                - host: vault.sts34.de
+              tls:
+                - secretName: vault-tls-certificate
+                  hosts:
+                    - vault.sts34.de
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vault
+
+

@@ -1,0 +1,71 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keyclaok
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
+  project: default
+  sources:
+    - chart: keycloak
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: "24.3.x"
+      helm:
+        values: |
+          auth:
+            adminUser: admin
+            existingSecret: keycloak-data-app
+            passwordSecretKey: password
+          externalDatabase:
+            database: bitnami_keycloak
+            existingSecret: keycloak-data-app
+            existingSecretDatabaseKey: dbname
+            existingSecretHostKey: host
+            existingSecretPasswordKey: password
+            existingSecretPortKey: port
+            existingSecretUserKey: username
+            host: ""
+            password: ""
+            port: 5432
+            user: bn_keycloak
+          extraEnvVars:
+            - name: KC_FEATURES
+              value: preview
+          ingress:
+            annotations:
+              cert-manager.io/cluster-issuer: hetzner-prod-issuer
+              nginx.ingress.kubernetes.io/proxy-buffer-size: 256k
+              nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+            enabled: true
+            hostname: id.sts34.de
+            ingressClassName: nginx
+            tls: true
+          metrics:
+            enabled: true
+            serviceMonitor:
+              enabled: true
+              labels:
+                release: kube-prom
+            prometheusRule:
+              enabled: true
+              labels:
+                release: kube-prom
+          postgresql:
+            enabled: false
+          production: true
+          proxyHeaders: xforwarded
+          replicaCount: 1
+          resources:
+            limits:
+              memory: 1024Mi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+
+
