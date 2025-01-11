@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  project: default
+  sources:
+    - chart: cilium
+      repoURL: https://helm.cilium.io
+      targetRevision: 1.16.x
+      helm:
+        values: |
+          USER-SUPPLIED VALUES:
+          externalIPs:
+            enabled: true
+          hostPort:
+            enabled: true
+          hubble:
+            metrics:
+              dashboards:
+                enabled: true
+                label: grafana
+              enabled:
+              - dns:query;ignoreAAAA
+              - drop
+              - tcp
+              - flow
+              - icmp
+              - http
+              serviceMonitor:
+                enabled: true
+            relay:
+              enabled: true
+            ui:
+              enabled: true
+          internalTrafficPolicy: local
+          k8sServiceHost: ""
+          k8sServicePort: ""
+          kubeProxyReplacement: false
+          nodePort:
+            enabled: true
+          socketLB:
+            enabled: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system

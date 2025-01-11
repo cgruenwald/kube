@@ -10,6 +10,7 @@ resources:
 - base/minio.yaml
 - base/vault.yaml
 - base/keycloak.yaml
+- base/cilium.yaml
 # - base/cert-manager-webhook-hetzner.yaml
 # - base/longhorn-app.yaml
 # - base/trivy-operator.yaml
