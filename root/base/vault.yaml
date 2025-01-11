@@ -10,6 +10,10 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+    - RespectIgnoreDifferences=true
+  ignoreDifferences:
+  - kind: MutatingWebhookConfiguration
+    name: vault-agent-injector-cfg
   project: default
   sources:
     - chart: vault
