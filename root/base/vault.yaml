@@ -12,8 +12,15 @@ spec:
     - CreateNamespace=true
     - RespectIgnoreDifferences=true
   ignoreDifferences:
-  - kind: MutatingWebhookConfiguration
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
     name: vault-agent-injector-cfg
+    jsonPointers:
+      - /webhooks/0/clientConfig/caBundle
+    jqPathExpressions:
+      - .webhooks[0].clientConfig.caBundle
+    managedFieldsManagers:
+      - kube-controller-manager
   project: default
   sources:
     - chart: vault
