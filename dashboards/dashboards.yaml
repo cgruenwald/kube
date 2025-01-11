@@ -1,5 +1,23 @@
 ---
 apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  labels:
+    app: grafana
+    dashboards: "grafana"
+  name: grafana
+  namespace: monitoring
+spec:
+  external:
+    url: http://kube-prom-grafana.monitoring.svc.cluster.local:3000
+    adminUser:
+      key: admin-username
+      name: grafana-admin
+    adminPassword:
+      key: admin-password
+      name: grafana-admin
+---
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: rabbitmq-overview-latest
