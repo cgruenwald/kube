@@ -13,7 +13,7 @@ spec:
   project: default
   sources:
     - chart: minio
-      repoURL: https://charts.bitnami.com/bitnami
+      repoURL: registry-1.docker.io/bitnamicharts
       targetRevision: v14.10.3
       helm:
         values: |
