@@ -252,4 +252,16 @@ spec:
   configMapRef:
     name: kube-prom-kube-prometheus-node-cluster-rsrc-use
     key: node-cluster-rsrc-use.json
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: kube-prom-kube-prometheus-persistentvolumesusage
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  configMapRef:
+    name: kube-prom-kube-prometheus-persistentvolumesusage
+    key: persistentvolumesusage.json
 ...
