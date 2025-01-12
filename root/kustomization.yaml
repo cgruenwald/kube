@@ -12,6 +12,7 @@ resources:
 - base/keycloak.yaml
 - base/cilium.yaml
 - base/ingress-nginx.yaml
+- base/seaweedfs.yaml
 # - base/cert-manager-webhook-hetzner.yaml
 # - base/longhorn-app.yaml
 # - base/trivy-operator.yaml

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: seaweedfs
+  namespace: argocd
+spec:
+  destination:
+    namespace: seaweedfs
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: seaweedfs
+    repoURL: https://github.com/cgruenwald/kube.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

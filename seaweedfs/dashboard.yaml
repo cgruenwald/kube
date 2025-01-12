@@ -1,0 +1,12 @@
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: seaweedfs-grafana-dashboard
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  configMapRef:
+    name: seaweedfs-grafana-dashboard
+    key: seaweedfs-grafana-dashboard.json
