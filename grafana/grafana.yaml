@@ -35,6 +35,17 @@ spec:
           containers:
             - name: grafana
               env:
+                - name: GF_DATABASE_HOST
+                  value: "grafana-db-rw:5432"
+                - name: GF_DATABASE_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: grafana-db-app
+                      key: password
+                - name: GF_DATABASE_NAME
+                  value: "app"
+                - name: GF_DATABASE_USER
+                  value: "app"
                 - name: AUTH_CLIENT_ID
                   valueFrom:
                     secretKeyRef:
@@ -78,3 +89,9 @@ spec:
       role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
     server:
       root_url: https://grafana.sts34.de
+    database:
+      type: postgres
+      name: ${GF_DATABASE_NAME}
+      host: ${GF_DATABASE_HOST}
+      user: ${GF_DATABASE_USER}
+      password: ${GF_DATABASE_PASSWORD}
