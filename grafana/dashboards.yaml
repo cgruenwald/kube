@@ -170,6 +170,8 @@ spec:
       dashboards: "grafana"
   grafanaCom:
     id: 13502
+  datasource:
+  - { name: DS_PROMETHEUS, value: Prometheus }
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard

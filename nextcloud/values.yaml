@@ -75,16 +75,17 @@ ingress:
 
 # Allow configuration of lifecycle hooks
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
-lifecycle: {}
+lifecycle:
+  postStartCommand: ["/bin/sh", "-c", "echo \"ServerName 192.168.100.20\" | tee -a /etc/apache2/apache2.conf"]
   # postStartCommand: []
   # preStopCommand: []
 
 phpClientHttpsFix:
-  enabled: false
+  enabled: true
   protocol: https
 
 nextcloud:
-  host: nextcloud
+  host: nextcloud.sts34.de
   username: admin
   password: changeme-6588cd68db-gt2bk
   ## Use an existing secret
@@ -97,7 +98,7 @@ nextcloud:
     smtpUsernameKey: smtp-username
     smtpPasswordKey: smtp-password
     smtpHostKey: smtp-host
-  update: 1
+  update: 0
   # If web server is not binding default port, you can define it
   containerPort: 80
   datadir: /var/www/html/data
@@ -108,6 +109,7 @@ nextcloud:
     - 'nextcloud.nextcloud.svc.cluster.local'
     - 'nextcloud'
     - 'nextcloud.sts34.de'
+    - '192.168.100.20'
   ## SMTP configuration
   mail:
     enabled: false
@@ -523,16 +525,16 @@ collabora:
 
   collabora:
     ## HTTPS nextcloud domain, if needed
-    aliasgroups: []
-    #   - host: "https://nextcloud.domain:443"
+    aliasgroups:
+       - host: "https://nextcloud.sts34.de:443"
 
     # set extra parameters for collabora
     # you may need to add --o:ssl.termination=true
-    extra_params: --o:ssl.enable=false
+    extra_params: --o:ssl.enable=false --o:ssl.termination=true
 
     ## Specify server_name when the hostname is not reachable directly for
     # example behind reverse-proxy. example: collabora.domain
-    server_name: null
+    server_name: collabora.sts34.de
 
     existingSecret:
       # set to true to to get collabora admin credentials from an existin secret
@@ -551,19 +553,24 @@ collabora:
   # setup ingress
   ingress:
     # enable ingress for collabora online
-    enabled: false
-    className: ""
+    enabled: true
+    className: "nginx"
     # please check collabora values.yaml for nginx/haproxy annotations examples
-    annotations: {}
+    annotations:
+      cert-manager.io/cluster-issuer: hetzner-prod-issuer
+      nginx.ingress.kubernetes.io/upstream-hash-by: "$arg_WOPISrc"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     hosts:
-      - host: chart-example.local
+      - host: collabora.sts34.de
         paths:
         - path: /
           pathType: ImplementationSpecific
-    tls: []
-    #  - secretName: collabora-ingress-tls
-    #    hosts:
-    #      - collabora.domain
+    tls:
+      - secretName: collabora-ingress-tls
+        hosts:
+          - collabora.sts34.de
 
   # see collabora helm README.md for recommended values
   resources: {}
