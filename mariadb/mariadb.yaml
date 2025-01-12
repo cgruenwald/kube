@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mariadb
+---
+apiVersion: k8s.mariadb.com/v1alpha1
+kind: MariaDB
+metadata:
+  name: mariadb
+  namespace: mariadb
+spec:
+  storage:
+    size: 3Gi
+    storageClassName: seaweedfs-storage
+  service:
+    type: LoadBalancer
+    metadata:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 192.168.100.21
+
+  metrics:
+    enabled: true
+    exporter:
+      image: prom/mysqld-exporter:v0.15.1
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 300m
+          memory: 512Mi
+      port: 9104
+      affinity:
+        antiAffinityEnabled: true
+    serviceMonitor:
+      prometheusRelease: kube-prom
+      jobLabel: mariadb-monitoring
+      interval: 10s
+      scrapeTimeout: 10s
+#    username: monitoring
+    passwordSecretKeyRef:
+      name: mariadb-metrics-password
+      key: password
