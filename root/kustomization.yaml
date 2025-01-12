@@ -6,7 +6,7 @@ resources:
 - base/observability.yaml
 - base/elastic-system.yaml
 - base/grafana-operator.yaml
-- base/grafana.yaml
+# - base/grafana.yaml
 - base/minio.yaml
 - base/vault.yaml
 - base/keycloak.yaml
