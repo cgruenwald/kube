@@ -223,4 +223,28 @@ spec:
     matchLabels:
       dashboards: "grafana"
   url: "https://raw.githubusercontent.com/cloudnative-pg/grafana-dashboards/refs/heads/main/charts/cluster/grafana-dashboard.json"
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: kube-prom-kube-prometheus-apiserver
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  configMapRef:
+    name: kube-prom-kube-prometheus-apiserver
+    key: apiserver.json
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: kube-prom-kube-prometheus-node-cluster-rsrc-use
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  configMapRef:
+    name: kube-prom-kube-prometheus-node-cluster-rsrc-use
+    key: node-cluster-rsrc-use.json
 ...
