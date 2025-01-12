@@ -87,7 +87,9 @@ spec:
       auth_url: "https://id.sts34.de/realms/StS34/protocol/openid-connect/auth"
       token_url: "https://id.sts34.de/realms/StS34/protocol/openid-connect/token"
       api_url: "https://id.sts34.de/realms/StS34/protocol/openid-connect/userinfo"
-      role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+      role_attribute_path: "contains(roles[*], 'grafanaadmin') && 'GrafanaAdmin' || contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
+      allow_assign_grafana_admin: "true"
+      skip_org_role_sync: "true"
     server:
       root_url: https://grafana.sts34.de
     database:

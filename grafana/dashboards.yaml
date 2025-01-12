@@ -173,6 +173,8 @@ spec:
   datasources:
     - datasourceName: DS_PROMETHEUS
       inputName: Prometheus
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
