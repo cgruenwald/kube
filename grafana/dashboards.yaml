@@ -277,6 +277,7 @@ spec:
     matchLabels:
       dashboards: "grafana"
   configMapRef:
+    namespace: seaweedfs
     name: seaweedfs-grafana-dashboard
     key: seaweedfs-grafana-dashboard.json
 ...
