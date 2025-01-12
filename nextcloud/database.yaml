@@ -11,3 +11,4 @@ spec:
     storageClass: directpv-min-io
   monitoring:
     enablePodMonitor: true
+  enableSuperuserAccess: true

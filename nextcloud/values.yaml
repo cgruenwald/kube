@@ -11,7 +11,7 @@ image:
   #   - myRegistrKeySecretName
 
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "nextcloud"
 podAnnotations: {}
 deploymentAnnotations: {}
 deploymentLabels: {}
@@ -26,10 +26,20 @@ ingress:
   enabled: true
   className: nginx
   annotations:
+    nginx.ingress.kubernetes.io/affinity: cookie
     nginx.ingress.kubernetes.io/proxy-body-size: 4G
   #  kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: hetzner-prod-issuer
   #  # Keep this in sync with the README.md:
+  #  intents.otterize.com/service-name: opendesk-nextcloud
+  #  meta.helm.sh/release-name: opendesk-nextcloud
+  #  meta.helm.sh/release-namespace: opendesk-apps
+  #  nginx.ingress.kubernetes.io/proxy-body-size: 100M
+#    nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+#    nginx.ingress.kubernetes.io/proxy-send-timeout: '600'
+#    nginx.org/client-max-body-size: 100M
+#    nginx.org/proxy-read-timeout: 600s
+#    nginx.org/proxy-send-timeout: 600s
     nginx.ingress.kubernetes.io/server-snippet: |-
       server_tokens off;
       proxy_hide_header X-Powered-By;
@@ -76,7 +86,7 @@ phpClientHttpsFix:
 nextcloud:
   host: nextcloud
   username: admin
-  password: changeme
+  password: changeme-6588cd68db-gt2bk
   ## Use an existing secret
   existingSecret:
     enabled: false
@@ -94,7 +104,10 @@ nextcloud:
   persistence:
     subPath:
   # if set, we'll template this list to the NEXTCLOUD_TRUSTED_DOMAINS env var
-  trustedDomains: []
+  trustedDomains:
+    - 'nextcloud.nextcloud.svc.cluster.local'
+    - 'nextcloud'
+    - 'nextcloud.sts34.de'
   ## SMTP configuration
   mail:
     enabled: false
@@ -114,7 +127,7 @@ nextcloud:
   objectStore:
     # https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/primary_storage.html#simple-storage-service-s3
     s3:
-      enabled: true
+      enabled: false
       # ignored if nextcloud.objectstore.s3.existingSecret is not empty string
       accessKey: ""
       # ignored if nextcloud.objectstore.s3.existingSecret is not empty string
@@ -122,11 +135,11 @@ nextcloud:
       # use legacy auth method
       legacyAuth: false
       # s3 endpoint to use; only required if you're not using AWS
-      host: "minio.sts34.de"
+      host: minio.sts34.de
       # use TLS/SSL for S3 connections
       ssl: true
       # default port that can be changed based on your object store, e.g. for minio, you can use 9000
-      port: "443"
+      port: 443
       # this is the default in the nextcloud docs
       region: "eu-west-1"
       # required if using s3, the name of the bucket you'd like to use
@@ -146,7 +159,7 @@ nextcloud:
       existingSecret: "nextcloud-secret"
       secretKeys:
         # key in nextcloud.objectStore.s3.existingSecret to use for s3 endpoint
-        host: "host"
+        host: ""
         # key in nextcloud.objectStore.s3.existingSecret to use for s3 accessKeyID
         accessKey: "accessKey"
         # key in nextcloud.objectStore.s3.existingSecret to use for s3 secretAccessKey
@@ -209,7 +222,7 @@ nextcloud:
     # disables the web based updater as the default nextcloud docker image does not support it
     upgrade-disable-web.config.php: true
     # -- imaginary support config
-    imaginary.config.php: false
+    imaginary.config.php: true
 
   # Extra config files created in /var/www/html/config/
   # ref: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#multiple-config-php-file
@@ -502,7 +515,7 @@ redis:
 ## for more options see https://github.com/CollaboraOnline/online/tree/master/kubernetes/helm/collabora-online
 ##
 collabora:
-  enabled: false
+  enabled: true
 
   autoscaling:
     # enable autocaling, please check collabora README.md first
@@ -532,7 +545,7 @@ collabora:
 
     # setup admin login credentials, these are ignored if
     # collabora.collabora.existingSecret.enabled=true
-    password: examplepass
+    password: examplepass-6588cd68db-gt2bk
     username: admin
 
   # setup ingress
@@ -684,7 +697,7 @@ dnsConfig: {}
 
 imaginary:
   # -- Start Imgaginary
-  enabled: false
+  enabled: true
   # -- Number of imaginary pod replicas to deploy
   replicaCount: 1
 

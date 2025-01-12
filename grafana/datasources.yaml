@@ -1,0 +1,36 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: grafanadatasource-prometheus
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  datasource:
+    name: "Prometheus"
+    type: prometheus
+    access: proxy
+    uid: prometheus
+    url: http://kube-prom-kube-prometheus-prometheus.monitoring:9090
+    isDefault: true
+    jsonData:
+      httpMethod: POST
+      timeInterval: 30s
+---
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: grafanadatasource-alertmanager
+spec:
+  instanceSelector:
+    matchLabels:
+      dashboards: "grafana"
+  datasource:
+    name: "Alertmanager"
+    type: alertmanager
+    access: proxy
+    uid: alertmanager
+    url: http://kube-prom-kube-prometheus-alertmanager.monitoring:9093
+    jsonData:
+      handleGrafanaManagedAlerts: false
+      implementation: prometheus

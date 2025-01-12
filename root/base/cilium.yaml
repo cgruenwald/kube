@@ -17,7 +17,6 @@ spec:
       targetRevision: 1.16.x
       helm:
         values: |
-          USER-SUPPLIED VALUES:
           externalIPs:
             enabled: true
           hostPort:
