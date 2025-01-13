@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  project: default
+  sources:
+    - chart: external-dns
+      repoURL: registry-1.docker.io/bitnamicharts
+      targetRevision: 8.7.x
+      helm:
+        values: |
+          namespace: external-dns
+          policy: sync
+          provider:
+            name: webhook
+            webhook:
+              image:
+                repository: ghcr.io/mconfalonieri/external-dns-hetzner-webhook
+                tag: v0.7.0
+              env:
+                - name: HETZNER_API_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: hetzner-credentials
+                      key: api-key
+              livenessProbe:
+                httpGet:
+                  path: /health
+                  port: http-wh-metrics
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+              readinessProbe:
+                httpGet:
+                  path: /ready
+                  port: http-wh-metrics
+                initialDelaySeconds: 10
+                timeoutSeconds: 5
+
+          extraArgs:
+            - "--txt-prefix=reg-%{record_type}-"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns
+
+
