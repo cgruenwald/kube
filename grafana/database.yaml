@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 3
   storage:
-    size: 1Gi
+    size: 5Gi
     storageClass: directpv-min-io
   monitoring:
     enablePodMonitor: true
