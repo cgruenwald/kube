@@ -3,6 +3,7 @@ kind: GrafanaDatasource
 metadata:
   name: grafanadatasource-prometheus
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -22,6 +23,7 @@ kind: GrafanaDatasource
 metadata:
   name: grafanadatasource-alertmanager
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"

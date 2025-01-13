@@ -12,3 +12,17 @@ spec:
   monitoring:
     enablePodMonitor: true
   enableSuperuserAccess: true
+  backup:
+    barmanObjectStore:
+      wal:
+        compression: gzip
+        encryption: AES256
+      destinationPath: s3://nextcloud-backup/
+      endpointURL: http://minio.minio.svc:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio-creds
+          key: MINIO_ACCESS_KEY
+        secretAccessKey:
+          name: minio-creds
+          key: MINIO_SECRET_KEY

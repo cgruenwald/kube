@@ -4,9 +4,23 @@ metadata:
   name: grafana-db
   namespace: monitoring
 spec:
-  instances: 2
+  instances: 3
   storage:
     size: 1Gi
     storageClass: directpv-min-io
   monitoring:
     enablePodMonitor: true
+  backup:
+    barmanObjectStore:
+      wal:
+        compression: gzip
+        encryption: AES256
+      destinationPath: s3://grafana-backup/
+      endpointURL: http://minio.minio.svc:9000
+      s3Credentials:
+        accessKeyId:
+          name: minio-creds
+          key: MINIO_ACCESS_KEY
+        secretAccessKey:
+          name: minio-creds
+          key: MINIO_SECRET_KEY

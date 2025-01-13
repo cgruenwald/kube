@@ -1,27 +1,10 @@
 ---
 apiVersion: grafana.integreatly.org/v1beta1
-kind: Grafana
-metadata:
-  labels:
-    app: grafana
-    dashboards: "grafana"
-  name: grafana
-  namespace: monitoring
-spec:
-  external:
-    url: https://grafana.sts34.de
-    adminUser:
-      key: admin-username
-      name: grafana-admin
-    adminPassword:
-      key: admin-password
-      name: grafana-admin
----
-apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: rabbitmq-overview-latest
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -44,6 +27,7 @@ kind: GrafanaDashboard
 metadata:
   name: mysql-overview
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -58,6 +42,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-views-global
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -69,6 +54,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-views-namespaces
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -80,6 +66,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-views-nodes
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -91,6 +78,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-views-pods
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -102,6 +90,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-system-api-server
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -113,6 +102,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-system-coredns
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -124,6 +114,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-addons-prometheus
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -135,6 +126,7 @@ kind: GrafanaDashboard
 metadata:
   name: kubernetes-addons-trivy-operator
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -157,6 +149,7 @@ kind: GrafanaDashboard
 metadata:
   name: keyclaok-dashboard
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -168,6 +161,7 @@ kind: GrafanaDashboard
 metadata:
   name: minio-dashboard
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -184,6 +178,7 @@ kind: GrafanaDashboard
 metadata:
   name: ingress-nginx-overview
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -195,6 +190,7 @@ kind: GrafanaDashboard
 metadata:
   name: ingress-nginx-kubernetes-controller
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -206,6 +202,7 @@ kind: GrafanaDashboard
 metadata:
   name: node-exporter-latest
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -217,6 +214,7 @@ kind: GrafanaDashboard
 metadata:
   name: argo-cd-from-argo
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -227,6 +225,7 @@ kind: GrafanaDashboard
 metadata:
   name: cnpg-dashboard
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -237,6 +236,7 @@ kind: GrafanaDashboard
 metadata:
   name: kube-prom-kube-prometheus-apiserver
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -249,6 +249,7 @@ kind: GrafanaDashboard
 metadata:
   name: kube-prom-kube-prometheus-node-cluster-rsrc-use
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
@@ -261,6 +262,7 @@ kind: GrafanaDashboard
 metadata:
   name: kube-prom-kube-prometheus-persistentvolumesusage
 spec:
+  resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
