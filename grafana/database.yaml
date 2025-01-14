@@ -4,7 +4,7 @@ metadata:
   name: grafana-db
   namespace: monitoring
 spec:
-  instances: 2
+  instances: 3
   storage:
     size: 5Gi
     storageClass: directpv-min-io
