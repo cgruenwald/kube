@@ -16,7 +16,7 @@ spec:
         compression: gzip
         encryption: AES256
       destinationPath: s3://grafana-backup/
-      endpointURL: http://minio.minio.svc:9000
+      endpointURL: https://minio-api.sts34.de
       s3Credentials:
         accessKeyId:
           name: minio-creds
