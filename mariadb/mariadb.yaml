@@ -33,7 +33,7 @@ spec:
       affinity:
         antiAffinityEnabled: true
     serviceMonitor:
-      prometheusRelease: kube-prom
+      prometheusRelease: prometheus
       jobLabel: mariadb-monitoring
       interval: 10s
       scrapeTimeout: 10s
