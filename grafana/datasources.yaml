@@ -32,7 +32,7 @@ spec:
     type: alertmanager
     access: proxy
     uid: alertmanager
-    url: http://kube-prom-kube-prometheus-alertmanager.monitoring:9093
+    url: http://prometheus-kube-prometheus-alertmanager.monitoring:9093
     jsonData:
       handleGrafanaManagedAlerts: false
       implementation: prometheus
