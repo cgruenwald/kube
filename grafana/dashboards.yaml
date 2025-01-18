@@ -234,39 +234,39 @@ spec:
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: kube-prom-kube-prometheus-apiserver
+  name: prometheus-kube-prometheus-apiserver
 spec:
   resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
   configMapRef:
-    name: kube-prom-kube-prometheus-apiserver
+    name: prometheus-kube-prometheus-apiserver
     key: apiserver.json
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: kube-prom-kube-prometheus-node-cluster-rsrc-use
+  name: prometheus-kube-prometheus-node-cluster-rsrc-use
 spec:
   resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
   configMapRef:
-    name: kube-prom-kube-prometheus-node-cluster-rsrc-use
+    name: prometheus-kube-prometheus-node-cluster-rsrc-use
     key: node-cluster-rsrc-use.json
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: kube-prom-kube-prometheus-persistentvolumesusage
+  name: prometheus-kube-prometheus-persistentvolumesusage
 spec:
   resyncPeriod: 24h
   instanceSelector:
     matchLabels:
       dashboards: "grafana"
   configMapRef:
-    name: kube-prom-kube-prometheus-persistentvolumesusage
+    name: prometheus-kube-prometheus-persistentvolumesusage
     key: persistentvolumesusage.json
 ...

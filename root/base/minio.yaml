@@ -43,11 +43,11 @@ spec:
             serviceMonitor:
               enabled: true
               labels:
-                release: kube-prom
+                release: prometheus
             prometheusRule:
               enabled: true
               additionalLabels:
-                release: kube-prom
+                release: prometheus
   destination:
     server: https://kubernetes.default.svc
     namespace: minio

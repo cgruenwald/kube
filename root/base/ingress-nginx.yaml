@@ -37,7 +37,7 @@ spec:
               serviceMonitor:
                 enabled: true
                 additionalLabels:
-                  release: kube-prom
+                  release: prometheus
                 scrapeInterval: 10s
             service:
               watchIngressWithoutClass: "true"
