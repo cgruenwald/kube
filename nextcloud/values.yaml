@@ -908,7 +908,7 @@ metrics:
     ## @param metrics.serviceMonitor.labels Extra labels for the ServiceMonitor
     ##
     labels:
-      release: kube-prom
+      release: prometheus
 
 
 rbac:

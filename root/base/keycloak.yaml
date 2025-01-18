@@ -50,11 +50,11 @@ spec:
             serviceMonitor:
               enabled: true
               labels:
-                release: kube-prom
+                release: prometheus
             prometheusRule:
               enabled: true
               labels:
-                release: kube-prom
+                release: prometheus
           postgresql:
             enabled: false
           production: true
