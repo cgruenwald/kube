@@ -372,7 +372,13 @@ nginx:
     # custom: |-
     #     worker_processes  1;..
 
-  resources: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
   # Set nginx container securityContext parameters. For example, you may need to define runAsNonRoot directive
   securityContext: {}
@@ -573,7 +579,13 @@ collabora:
           - collabora.sts34.de
 
   # see collabora helm README.md for recommended values
-  resources: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
 
 ## Cronjob to execute Nextcloud background tasks
@@ -585,7 +597,13 @@ cronjob:
   ## Cronjob sidecar resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
   # Allow configuration of lifecycle hooks
   # ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
@@ -629,7 +647,7 @@ persistence:
   # existingClaim:
 
   accessMode: ReadWriteOnce
-  size: 8Gi
+  size: 28Gi
 
   ## Use an additional pvc for the data directory rather than a subpath of the default PVC
   ## Useful to store data on a different storageClass (e.g. on slower disks)
@@ -642,17 +660,17 @@ persistence:
     accessMode: ReadWriteOnce
     size: 8Gi
 
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
-  #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
-  #  memory: 128Mi
+  limits:
+   cpu: 100m
+   memory: 128Mi
+  requests:
+   cpu: 100m
+   memory: 128Mi
 
 ## Liveness and readiness probe values
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
@@ -730,8 +748,14 @@ imaginary:
   tolerations: []
 
   # -- imaginary resources
-  resources: {}
+  resources:
 
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
   # -- Optional security context for the Imaginary container
   securityContext:
     runAsUser: 1000
@@ -805,7 +829,13 @@ metrics:
   ## Metrics exporter resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
 
   # -- Metrics exporter pod Annotation
   podAnnotations: {}
