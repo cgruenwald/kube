@@ -896,7 +896,7 @@ prometheus:
           resources:
             requests:
               storage: 50Gi
-          storageClassName: nfs-client
+          storageClassName: seaweedfs-storage
     thanos: {}
     tolerations: []
     topologySpreadConstraints: []
