@@ -12,7 +12,7 @@ spec:
     type: prometheus
     access: proxy
     uid: prometheus
-    url: http://kube-prom-kube-prometheus-prometheus.monitoring:9090
+    url: http://prometheus-kube-prometheus-prometheus.monitoring:9090
     isDefault: true
     jsonData:
       httpMethod: POST
