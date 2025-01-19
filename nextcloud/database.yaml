@@ -12,6 +12,10 @@ spec:
   monitoring:
     enablePodMonitor: true
   enableSuperuserAccess: true
+  affinity:
+    enablePodAntiAffinity: true
+    topologyKey: kubernetes.io/hostname
+    podAntiAffinityType: required
   backup:
     barmanObjectStore:
       wal:
