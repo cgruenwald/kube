@@ -12,7 +12,7 @@ resources:
 - base/keycloak.yaml
 - base/cilium.yaml
 - base/ingress-nginx.yaml
-- base/seaweedfs.yaml
+# - base/seaweedfs.yaml
 - base/external-secrets.yaml
 - base/external-dns.yaml
 # - base/cert-manager-webhook-hetzner.yaml
