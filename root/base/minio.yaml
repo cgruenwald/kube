@@ -17,6 +17,16 @@ spec:
       targetRevision: 14.10.x
       helm:
         values: |
+          podAnnotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: "/minio/v2/metrics/cluster"
+            prometheus.io/port: "9000"
+          global:
+            defaultStorageClass: "directpv-min-io"
+          mode: distributed
+          statefulset:
+            replicaCount: 4
+            drivesPerNode: 2
           auth:
             existingSecret: "minio-secret"
             rootUserSecretKey: "user"
