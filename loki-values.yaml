@@ -1,0 +1,8 @@
+loki:
+  structuredConfig:
+    storageConfig:
+      s3:
+        bucket_name: my-ruler-bucket
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        endpoint: minio-api.sts34.de
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}

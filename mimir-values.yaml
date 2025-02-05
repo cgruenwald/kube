@@ -1,0 +1,45 @@
+global:
+  extraEnvFrom:
+    - secretRef:
+        name: mimir-bucket-secret
+  podAnnotations:
+    bucketSecretVersion: "0"
+
+# This turns of the built-in MinIO support
+minio:
+  enabled: false
+
+mimir:
+  structuredConfig:
+    # Uncomment when using Grafana Enterprise Metrics
+    # admin_client:
+    #   storage:
+    #     s3:
+    #       bucket_name: my-admin-bucket
+    #       access_key_id: ${AWS_ACCESS_KEY_ID}
+    #       endpoint: s3.amazonaws.com
+    #       secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+    alertmanager_storage:
+      s3:
+        bucket_name: my-ruler-bucket
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        endpoint: minio-headless.minio.svc:9000
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+        insecure: true
+    blocks_storage:
+      backend: s3
+      s3:
+        bucket_name: my-blocks-bucket
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        endpoint: minio-headless.minio.svc:9000
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+        insecure: true
+    ruler_storage:
+      s3:
+        bucket_name: my-ruler-bucket
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        endpoint: minio-headless.minio.svc:9000
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+        insecure: true
+    limits:
+      max_global_series_per_user: 2000000

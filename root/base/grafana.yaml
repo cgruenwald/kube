@@ -13,8 +13,6 @@ spec:
     repoURL: https://github.com/cgruenwald/kube.git
     targetRevision: HEAD
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: {}
     syncOptions:
     - CreateNamespace=true
