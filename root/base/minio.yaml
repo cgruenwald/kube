@@ -48,6 +48,15 @@ spec:
           persistence:
             storageClass: "directpv-min-io"
             size: 10Gi
+          resources:
+            requests:
+              cpu: 250m
+              ephemeral-storage: 50Mi
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              ephemeral-storage: 4Gi
+              memory: 2048Mi
           metrics:
             enabled: true
             serviceMonitor:
