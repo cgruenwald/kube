@@ -1,0 +1,44 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.100.200 - 192.168.100.220
+---
+apiVersion: metallb.io/v1beta2
+kind: BGPPeer
+metadata:
+  name: opnsense
+  namespace: metallb-system
+spec:
+  holdTime: 1m30s
+  keepaliveTime: 0s
+  myASN: 64513
+  passwordSecret: {}
+  peerASN: 64512
+  peerAddress: 192.168.100.1
+---
+apiVersion: metallb.io/v1beta1
+kind: BGPAdvertisement
+metadata:
+  name: advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
+  peers:
+  - opnsense
+# apiVersion: metallb.io/v1beta1
+# kind: BGPAdvertisement
+# metadata:
+#   name: bgpadvertisement1
+#   namespace: metallb-system
+# spec:
+#   aggregationLength: 32
+#   communities:
+#   - 64512:1234
+#   ipAddressPools:
+#   - first-pool
+#   localPref: 100

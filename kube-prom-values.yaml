@@ -374,18 +374,18 @@ grafana:
   forceDeployDashboards: true
   forceDeployDatasources: true
   ingress:
-    annotations:
-      cert-manager.io/cluster-issuer: hetzner-prod-issuer
+    annotations: {}
+    #  cert-manager.io/cluster-issuer: hetzner-prod-issuer
     enabled: false
     hosts:
-    - grafana.sts34.de
+    - grafana.sts34.home
     ingressClassName: nginx
     labels: {}
     path: /
-    tls:
-    - hosts:
-      - grafana.sts34.de
-      secretName: grafana.sts34.de-tls
+    # tls:
+    # - hosts:
+    #   - grafana.sts34.de
+    #   secretName: grafana.sts34.de-tls
   namespaceOverride: ""
   prune: false
   rbac:
@@ -895,8 +895,8 @@ prometheus:
           - ReadWriteMany
           resources:
             requests:
-              storage: 50Gi
-          storageClassName: seaweedfs-storage
+              storage: 250Gi
+          storageClassName: nfs-client
     thanos: {}
     tolerations: []
     topologySpreadConstraints: []

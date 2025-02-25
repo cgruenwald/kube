@@ -1,0 +1,29 @@
+
+controller:
+  externalTrafficPolicy: "Local"
+  hostNetwork: true
+  allowSnippetAnnotations: "true"
+  extraArgs:
+    enable-ssl-passthrough: "true"
+  ingressClassResource:
+    default: true
+  kind: DaemonSet
+#  metrics:
+#    enabled: true
+#    port: 10254
+#    portName: metrics
+#    service:
+#      annotations:
+#        prometheus.io/port: "10254"
+#        prometheus.io/scrape: "true"
+#    serviceMonitor:
+#      enabled: true
+#      additionalLabels:
+#        release: prometheus
+#      scrapeInterval: 10s
+  service:
+    # type: NodePort
+    type: LoadBalancer
+    watchIngressWithoutClass: "true"
+defaultBackend:
+  enabled: true
