@@ -6,15 +6,15 @@ metadata:
   labels:
     dashboards: "grafana"
 spec:
-  version: 11.4.0
+  version: 11.5.2
   ingress:
     metadata:
-#      annotations:
-#        cert-manager.io/cluster-issuer: hetzner-prod-issuer
+      annotations:
+        cert-manager.io/cluster-issuer: hetzner-prod-issuer
     spec:
       ingressClassName: nginx
       rules:
-        - host: grafana.sts34.home
+        - host: grafana.sts34.de
           http:
             paths:
               - backend:
@@ -24,6 +24,10 @@ spec:
                       number: 3000
                 path: /
                 pathType: Prefix
+      tls:
+        - hosts:
+            - grafana.sts34.de
+          secretName: grafana.sts34.de-tls
   config:
     log:
       mode: "console"
